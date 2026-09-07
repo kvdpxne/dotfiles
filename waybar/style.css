@@ -1,0 +1,174 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: #c0caf5;
+  border: none;
+  border-radius: 8px;
+  margin: 3px 6px 0 6px;
+}
+
+#custom-menu,
+#workspaces,
+#custom-notifications,
+#clock,
+#privacy,
+#tray,
+#memory,
+#custom-swap,
+#battery,
+#power-profiles-daemon,
+#bluetooth,
+#backlight,
+#wireplumber,
+#wireplumber#source,
+#submap,
+#network {
+  margin-bottom: 2px;
+  background: rgba(26, 27, 38, 0.7);
+  border-radius: 6px;
+  color: #c0caf5;
+}
+
+#custom-menu {
+  font-size: 14px;
+  padding: 0 14px 0 10px;
+}
+
+#custom-menu label {
+  padding: 0;
+  margin: 0;
+}
+
+#workspaces {
+  padding: 0 6px;
+}
+
+#workspaces button {
+  padding: 0 8px 0 2px; 
+  font-size: 14px;
+  min-width: 16px;
+  color: #565f89;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  color: #565f89;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#workspaces button.active {
+  color: #7aa2f7;
+}
+
+#workspaces button.active:hover {
+  color: #7aa2f7;
+}
+
+#workspaces .workspace-label {
+  padding: 0 2px;
+}
+
+#custom-notifications {
+  padding: 0 10px 0 8px;
+}
+
+#custom-notifications.dnd-active {
+  color: #f7768e;
+}
+
+#clock {
+  padding: 0 10px;
+  font-weight: 700;
+}
+
+#privacy {
+  padding: 0 6px;
+}
+
+#privacy-item {
+  padding: 0 2px;
+}
+
+#privacy-item.screenshare {
+  color: #7aa2f7;
+}
+
+#privacy-item.audio-in {
+  color: #e0af68;
+}
+
+#privacy-item.audio-out {
+  color: #9ece6a;
+}
+
+#tray,
+#memory,
+#custom-swap,
+#battery,
+#power-profiles-daemon,
+#bluetooth,
+#backlight,
+#wireplumber,
+#wireplumber#source,
+#submap {
+  padding: 0 8px;
+}
+
+#network {
+  padding: 0 10px 0 6px;
+  /* lewy padding większy, aby przesunąć ikonę w prawo */
+}
+
+#battery.warning:not(.charging) {
+  color: #e0af68;
+}
+
+#battery.critical:not(.charging) {
+  color: #f7768e;
+  animation: blink 1s infinite;
+}
+
+#network.disconnected {
+  color: #565f89;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  color: #f7768e;
+}
+
+#wireplumber.muted,
+#wireplumber#source.muted {
+  color: #f7768e;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+tooltip {
+  background: rgba(26, 27, 38, 0.95);
+  border: 1px solid #3b4261;
+  border-radius: 6px;
+  color: #c0caf5;
+  font-size: 12px;
+}
+
+tooltip label {
+  padding: 6px 10px;
+}

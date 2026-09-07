@@ -1,0 +1,101 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "ignore-gtk-theme": true,
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "layer-shell": true,
+  "control-center-positionX": "right",
+  "control-center-positionY": "top",
+  "control-center-margin-top": 2,
+  "control-center-margin-bottom": 2,
+  "control-center-margin-right": 2,
+  "control-center-margin-left": 0,
+  "control-center-layer": "overlay",
+  "control-center-exclusive-zone": true,
+  "control-center-width": 380,
+  "control-center-height": -1,
+  "fit-to-screen": false,
+  "timeout": 8,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "notification-2fa-action": true,
+  "notification-grouping": false,
+  "notification-window-width": 420,
+  "notification-window-height": -1,
+  "notification-icon-size": 36,
+  "notification-body-image-height": 80,
+  "notification-body-image-width": 160,
+  "relative-timestamps": true,
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "widgets": [
+    "menubar",
+    "volume",
+    "backlight",
+    "mpris",
+    "dnd",
+    "title",
+    "notifications"
+  ],
+  "widget-config": {
+    "menubar": {
+      "buttons#theme": {
+          "position": "left",
+          "actions": [{
+              "label": "󰖔",
+              "command": "~/.local/bin/theme-toggle",
+              "type": "toggle",
+              "update-command": "~/.local/bin/theme-state"
+          }]
+      }
+    },
+    "volume": {
+      "label": "",
+      "step": 5,
+      "min": 0,
+      "max": 100
+    },
+    "backlight": {
+      "label": "",
+      "step": 5,
+      "min": 0,
+      "max": 100,
+      "device": "intel_backlight"
+    },
+    "mpris": {
+      "blacklist": [],
+      "autohide": false,
+      "show-album-art": "always",
+      "loop-carousel": true
+    },
+    "dnd": {
+      "text": "Nie przeszkadzać"
+    },
+    "title": {
+      "text": "Powiadomienia",
+      "clear-all-button": true,
+      "button-text": "Wyczyść"
+    },
+    "notifications": {
+      "group-by-app": true
+    }
+  },
+  "scripts": {
+    "screenshot-edit": {
+      "exec": "~/.local/bin/screenshot-edit",
+      "app-name": "screenshot",
+      "summary": "Edytować screenshot?",
+      "run-on": "action",
+      "action-name": "edit"
+    }
+  },
+  "notification-visibility": {
+    "screenshot-edit-request": {
+      "state": "enabled",
+      "app-name": "screenshot",
+      "summary": "Edytować screenshot?"
+    }
+  }
+}
