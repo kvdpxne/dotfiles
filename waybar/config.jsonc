@@ -9,6 +9,13 @@
   "margin-bottom": 1,
   "margin-left": 2,
   "margin-right": 2,
+  "group/backlight-sunset": {
+    "orientation": "horizontal",
+    "modules": [
+      "backlight",
+      "custom/hyprsunset"
+    ]
+  },
   "modules-left": [
     "custom/menu",
     "hyprland/submap",
@@ -21,7 +28,7 @@
   ],
   "modules-right": [
     "tray",
-    "backlight",
+    "group/backlight-sunset",
     "battery",
     "bluetooth",
     "network",
@@ -161,6 +168,14 @@
     "on-scroll-up": "brightnessctl set 5%+",
     "on-scroll-down": "brightnessctl set 5%-",
     "interval": 40
+  },
+  "custom/hyprsunset": {
+    "exec": "hyprctl hyprsunset profile | awk -F': ' '/Temperature/ {t=$2} END {print t\"K\"}'",
+    "interval": 40,
+    "format": "{}",
+    "tooltip": true,
+    "on-click": "hyprctl hyprsunset identity",
+    "on-click-right": "hyprctl hyprsunset temperature 5500"
   },
   "battery": {
     "interval": 20,

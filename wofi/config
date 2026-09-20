@@ -1,8 +1,8 @@
-width=600
+width=540
 height=320
 location=center
 show=drun
-prompt=Spotlight Search
+prompt=Search using keywords
 filter_rate=100
 allow_markup=true
 no_actions=true
@@ -13,4 +13,4 @@ insensitive=true
 allow_images=true
 image_size=24
 columns=1
-lines=5
+lines=6

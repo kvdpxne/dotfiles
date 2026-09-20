@@ -45,6 +45,7 @@ local menu        = "~/.config/wofi/launch.sh"
 hl.on("hyprland.start", function()
   hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
   hl.exec_cmd("hypridle")
+  hl.exec_cmd("hyprsunset")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("swaync")
   hl.exec_cmd("waybar")
@@ -65,6 +66,14 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
+-- Prefer Wayland-native backends so toolkits do not fall back to
+-- XWayland. XWayland uses extra CPU (and therefore battery) because
+-- every frame has to be translated.
+hl.env("GDK_BACKEND", "wayland,x11,*")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("SDL_VIDEODRIVER", "wayland,x11")
+hl.env("CLUTTER_BACKEND", "wayland")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -119,76 +128,83 @@ hl.config({
     active_opacity   = 1.0,
     inactive_opacity = 1.0,
 
+    -- Dimming inactive windows is pure extra GPU work.
+    dim_inactive     = false,
+
     shadow           = {
-      enabled      = true,
-      range        = 4,
-      render_power = 3,
-      color        = 0xee1a1a1a,
+      enabled = false,
     },
 
     blur             = {
-      enabled  = true,
-      size     = 3,
-      passes   = 1,
-      vibrancy = 0.1696,
+      enabled = false,
     },
   },
 
   animations = {
-    enabled = false,
+    enabled = true,
   },
 })
 
--- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
-hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
-hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
-hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
-hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
+-- ─────────────────────────────────────────────────────────────
+-- KINETIC PERSONALITIES — curves
+-- Uwaga: Twoja wersja Hyprlanda wymaga `dampening` (nie `damping`).
+-- ─────────────────────────────────────────────────────────────
 
--- Default springs
-hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("confident", { type = "spring", mass = 1,   stiffness = 260, dampening = 32 })
+hl.curve("playful",   { type = "spring", mass = 1,   stiffness = 180, dampening = 18 })
+hl.curve("gliding",   { type = "spring", mass = 1,   stiffness = 110, dampening = 24 })
+hl.curve("weighted",  { type = "spring", mass = 1.2, stiffness = 95,  dampening = 26 })
+hl.curve("cinematic", { type = "spring", mass = 1,   stiffness = 70,  dampening = 20 })
 
-hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
+hl.curve("crisp", { type = "bezier", points = { { 0.3, 0 }, { 0.15, 1 } } })
+hl.curve("soft",  { type = "bezier", points = { { 0.4, 0 }, { 0.2,  1 } } })--------------------------------
+---- WINDOWS AND WORKSPACES ----
+--------------------------------
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
+-- Hide the border when there is only one window visible on a workspace.
+-- Hyprland re-evaluates these selectors on every window open/close/move,
+-- so the border appears again automatically when a second window shows up.
+--
+--   w[tv1] = workspace with exactly 1 tiled, visible window
+--   f[1]   = workspace with exactly 1 floating window
+--
+-- Keeping `rounding = 4` means the single window still has soft corners;
+-- only the 1 px outline disappears. If you want sharp corners too, add
+-- `rounding = 0` to both rules.
+hl.workspace_rule({
+  workspace = "w[tv1]",
+  gaps_in = 0,
+  gaps_out = 0
+})
+
+hl.workspace_rule({
+  workspace = "f[1]",
+  gaps_in = 0,
+  gaps_out = 0
+})
+
+hl.window_rule({
+  name = "no-border-single-tiled",
+  match = {
+    float = false,
+    workspace = "w[tv1]"
+  },
+  border_size = 0,
+})
+
+hl.window_rule({
+  name = "no-border-single-floating",
+  match = {
+    float = false,
+    workspace = "f[1]"
+  },
+  border_size = 0,
+})
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
   dwindle = {
-    preserve_split = true,     -- You probably want this
+    preserve_split = true, -- You probably want this
   },
 })
 
@@ -212,12 +228,73 @@ hl.config({
 
 hl.config({
   misc = {
-    force_default_wallpaper = -1,     -- Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = true,     -- If true disables the random hyprland logo / anime girl background. :(
-    disable_splash_rendering = true
-  }
-})
+    -- No anime wallpaper, no Hyprland logo, no splash text.
+    force_default_wallpaper  = -1,
+    disable_hyprland_logo    = true,
+    disable_splash_rendering = true,
 
+    -- VRR (Adaptive Sync). 0 = off, 1 = on, 2 = fullscreen only,
+    -- 3 = fullscreen with video/game content type.
+    -- "2" is a good battery compromise: panels stay at a low fixed
+    -- refresh rate in normal use and only sync when it actually helps.
+    vrr                      = 2,
+
+    -- Cap the FPS of unfocused windows in the background. kitty
+    -- already throttles its own repaints via repaint_delay, but
+    -- this caps the compositor's cost for every background window.
+    render_unfocused_fps     = 10,
+
+    -- Wake monitors from DPMS on keyboard / mouse input.
+    key_press_enables_dpms   = true,
+    mouse_move_enables_dpms  = true,
+
+    -- Keep autoreload on for convenience. Set to true if you would
+    -- rather reload manually with `hyprctl reload` (saves a tiny
+    -- amount of CPU by not watching files).
+    disable_autoreload       = false,
+
+    -- Do not auto-focus newly opened windows. Avoids spurious
+    -- window switches and redraws when background apps pop up.
+    focus_on_activate        = false,
+
+    -- Close the special workspace if the last window is removed.
+    close_special_on_empty   = true,
+  },
+
+  -- Xwayland: keep enabled for compatibility, but prefer nearest-
+  -- neighbor scaling so legacy apps are not rendered blurry (which
+  -- would cost extra GPU work).
+  xwayland = {
+    enabled              = true,
+    use_nearest_neighbor = true,
+  },
+
+  -- Render tuning.
+  render = {
+    -- Direct scanout reduces lag and power for fullscreen apps
+    -- (games, fullscreen video). 0 = off, 1 = on, 2 = auto.
+    direct_scanout = 2,
+
+    -- Color management stays on; disabling it is not worth the
+    -- visual regressions.
+    cm_enabled = true,
+  },
+
+  -- Debug: keep the efficient defaults but make them explicit.
+  debug = {
+    damage_tracking = 2,    -- full damage tracking (most efficient)
+    vfr             = true, -- only render frames when there is damage
+    disable_logs    = true, -- do not write logs (saves disk I/O)
+    disable_time    = true,
+  },
+
+  -- Binds tuning.
+  binds = {
+    -- Wait 300 ms after a scroll event before allowing another.
+    -- Slightly reduces CPU wakeups during fast scrolling.
+    scroll_event_delay = 300,
+  },
+})
 
 ---------------
 ---- INPUT ----
@@ -232,11 +309,19 @@ hl.config({
     kb_rules     = "",
 
     follow_mouse = 1,
-
-    sensitivity  = 0,    -- -1.0 - 1.0, 0 means no modification.
+    sensitivity  = 0,
 
     touchpad     = {
-      natural_scroll = false,
+      -- Natural scroll is off in your original config; keep it.
+      -- Consider `natural_scroll = true` if you prefer macOS-style
+      -- scrolling — it does not affect battery.
+      natural_scroll       = false,
+
+      -- These are on by default but made explicit: they help avoid
+      -- accidental input while typing (and therefore avoid waking
+      -- the compositor unnecessarily).
+      disable_while_typing = true,
+      tap_to_click         = true,
     },
   },
 })
@@ -312,7 +397,7 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.local/bin/screenshot wind
 -- Hyprpicker – two color‑picking modes
 -- =============================================
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.exec_cmd("hyprpicker -a")) -- HEX format
---hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprpicker -a -f rgb"))   -- RGB format
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.exec_cmd("hyprpicker -a -f rgb"))   -- RGB format
 
 -- Toggle between Dwindle and Master: SUPER + ALT + L
 hl.bind(mainMod .. " + ALT + L", function()
@@ -359,7 +444,7 @@ hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "down" })
 -- Switch workspaces: SUPER + [0-9]
 -- Move active window to workspace: SUPER + SHIFT + [0-9]
 for i = 1, 10 do
-  local key = i % 10   -- maps 10 to 0
+  local key = i % 10 -- maps 10 to 0
   hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
   hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end

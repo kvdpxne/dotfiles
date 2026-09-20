@@ -4,85 +4,81 @@
 }
 
 .control-center {
-  background: rgba(0, 0, 0, 0.85);
-  color: #c0caf5;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: rgba(18, 18, 18, 0.96);
+  color: #F8FAFC;
+  border: 1px solid #2A2A2A;
   border-right: none;
   border-radius: 16px;
-  padding: 4px 4px; /* zmniejszone z 8px 6px */
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
-  min-height: 620px; /* zmniejszone z 600px */
+  padding: 4px 4px;
+  box-shadow: -4px 0 24px #000000B3;
+  min-height: 620px;
 }
 
-/* === KOMPAKTOWY UKŁAD === */
 .control-center .widget-box {
   margin: 0;
 }
 
-/* === PRZEWIJANIE === */
 .control-center scrollbar {
   background: transparent;
 }
 
 .control-center scrollbar slider {
-  background: rgba(0, 0, 0, 0.3);
+  background: #3F3F46;
   border-radius: 3px;
   min-width: 4px;
 }
 
 .control-center scrollbar slider:hover {
-  background: rgba(192, 202, 245, 0.2);
+  background: #52525B;
 }
 
-/* Pasek menubar */
 .widget-menubar {
-  padding: 2px 8px; /* zmniejszone z 4px 12px */
+  padding: 2px 8px;
   background: transparent;
 }
 
-.widget-menubar > box > button {
-  background: rgba(0, 0, 0, 0.3);
+.widget-menubar>box>button {
+  background: #1F1F1F;
   border: none;
   border-radius: 8px;
-  color: #c0caf5;
-  padding: 4px 10px; /* zmniejszone z 6px 14px */
+  color: #CBD5E1;
+  padding: 4px 10px;
   font-size: 16px;
   transition: all 0.2s;
 }
 
-.widget-menubar > box > button:hover {
-  background: rgba(192, 202, 245, 0.2);
+.widget-menubar>box>button:hover {
+  background: #2A2A2A;
+  color: #F8FAFC;
 }
 
-.widget-menubar > box > button.active {
-  background: rgba(192, 202, 245, 0.3);
-  color: #c0caf5;
+.widget-menubar>box>button.active {
+  background: #1E3A8A;
+  color: #DBEAFE;
 }
 
-/* === WIDGETY GŁOŚNOŚCI I PODŚWIETLENIA === */
 .widget-volume,
 .widget-backlight {
   background: transparent;
   border: none;
-  padding: 2px 4px; /* zmniejszone z 5px 4px */
-  margin: 1px 0; /* zmniejszone z 3px 0 */
+  padding: 2px 4px;
+  margin: 1px 0;
 }
 
 .widget-volume:hover,
 .widget-backlight:hover {
-  background: rgba(0, 0, 0, 0.15);
+  background: #1F1F1F;
   border-radius: 8px;
 }
 
 .widget-volume label,
 .widget-backlight label {
-  color: #c0caf5;
+  color: #CBD5E1;
   font-size: 13px;
-  margin-right: 6px; /* zmniejszone z 8px */
-  min-width: 20px; /* zmniejszone z 24px */
+  margin-right: 6px;
+  min-width: 20px;
 }
 
-/* === SUKWAKI (MINIATUROWE) === */
 .widget-volume scale,
 .widget-backlight scale {
   background: transparent;
@@ -91,39 +87,39 @@
 
 .widget-volume scale trough,
 .widget-backlight scale trough {
-  background: rgba(0, 0, 0, 0.4);
+  background: #2A2A2A;
   border-radius: 2px;
   min-height: 4px;
 }
 
 .widget-volume scale highlight,
 .widget-backlight scale highlight {
-  background: #c0caf5;
+  background: #60A5FA;
   border-radius: 2px;
 }
 
 .widget-volume scale slider,
 .widget-backlight scale slider {
-  background: #c0caf5;
+  background: #F8FAFC;
   border-radius: 50%;
-  min-height: 10px; /* zmniejszone z 12px */
-  min-width: 10px;  /* zmniejszone z 12px */
-  margin: -3px;    /* zmniejszone z -4px */
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  min-height: 10px;
+  min-width: 10px;
+  margin: -3px;
+  box-shadow: 0 1px 4px #00000080;
 }
 
 .widget-volume scale slider:hover,
 .widget-backlight scale slider:hover {
-  background: rgba(192, 202, 245, 0.7);
-  min-height: 12px; /* zmniejszone z 14px */
-  min-width: 12px;  /* zmniejszone z 14px */
+  background: #60A5FA;
+  min-height: 12px;
+  min-width: 12px;
 }
 
 .widget-volume scale value,
 .widget-backlight scale value {
-  color: rgba(192, 202, 245, 0.5);
+  color: #94A3B8;
   font-size: 10px;
-  min-width: 24px; /* zmniejszone z 28px */
+  min-width: 24px;
 }
 
 .widget-mpris .widget-mpris-player {
@@ -131,102 +127,98 @@
   padding: 0px;
 }
 
-/* === WIDGET MPRIS (ODTWARZACZ) - PEŁNA SZEROKOŚĆ === */
-.widget-mpris .widget-mpris-player > box {
+.widget-mpris .widget-mpris-player>box {
   margin: 0;
   padding: 2px 8px 2px 2px;
 }
 
 .widget-mpris .widget-mpris-album-art {
-  margin-right: 0px; /* zmniejszone z 2px */
+  margin-right: 0px;
 }
 
-.widget-mpris .widget-mpris-player > box > box {
-  margin-bottom: 4px; /* zmniejszone z 8px */
+.widget-mpris .widget-mpris-player>box>box {
+  margin-bottom: 4px;
 }
 
 .widget-mpris .widget-mpris-title {
-  color: #c0caf5;
+  color: #F8FAFC;
   font-weight: 500;
   font-size: 13px;
-  min-width: 100px; /* zmniejszone z 120px */
+  min-width: 100px;
 }
 
 .widget-mpris .widget-mpris-subtitle {
-  color: #c0caf5;
+  color: #CBD5E1;
   font-size: 11px;
   opacity: 0.7;
-  min-width: 80px; /* zmniejszone z 100px */
+  min-width: 80px;
 }
 
 .widget-mpris button {
-  background: rgba(0, 0, 0, 0.3);
+  background: #1F1F1F;
   border: none;
   border-radius: 6px;
-  color: #c0caf5;
-  padding: 4px 8px; /* zmniejszone z 6px 10px */
+  color: #CBD5E1;
+  padding: 4px 8px;
   font-size: 13px;
-  min-width: 28px; /* zmniejszone z 32px */
-  min-height: 28px; /* zmniejszone z 32px */
+  min-width: 28px;
+  min-height: 28px;
 }
 
 .widget-mpris button:hover {
-  background: rgba(192, 202, 245, 0.15);
-  color: #c0caf5;
+  background: #2A2A2A;
+  color: #F8FAFC;
 }
 
-/* === WIDGET DND === */
 .widget-dnd {
   background: transparent;
-  color: #c0caf5;
-  margin: 2px 0 1px 5px; /* zmniejszone z 5px 0 3px 0 */
-  padding: 4px 10px; /* zmniejszone z 7px 12px */
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #CBD5E1;
+  margin: 2px 0 1px 5px;
+  padding: 4px 10px;
+  border: 1px solid #2A2A2A;
   border-radius: 8px;
   font-size: 11px;
 }
 
 .widget-dnd:hover {
-  background: rgba(0, 0, 0, 0.15);
-  color: #c0caf5;
+  background: #1F1F1F;
+  color: #F8FAFC;
 }
 
-.widget-dnd > * {
-  color: #c0caf5;
+.widget-dnd>* {
+  color: #CBD5E1;
 }
 
-/* Belka powiadomień */
 .widget-title {
   background: transparent;
-  color: #c0caf5;
-  margin: 2px 0 1px 5px; /* zmniejszone z 5px 0 3px 0 */
-  padding: 4px 10px; /* zmniejszone z 7px 12px */
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #CBD5E1;
+  margin: 2px 0 1px 5px;
+  padding: 4px 10px;
+  border: 1px solid #2A2A2A;
   border-radius: 8px;
   font-size: 11px;
 }
 
 .widget-title:hover {
-  background: rgba(0, 0, 0, 0.15);
-  color: #c0caf5;
+  background: #1F1F1F;
+  color: #F8FAFC;
 }
 
 .widget-title button {
-  background: rgba(0, 0, 0, 0.3);
-  color: #c0caf5;
+  background: #1F1F1F;
+  color: #CBD5E1;
   border-radius: 6px;
   border: none;
-  padding: 2px 8px; /* zmniejszone z 2px 10px */
+  padding: 2px 8px;
   font-size: 11px;
   font-weight: 400;
 }
 
 .widget-title button:hover {
-  background: rgba(192, 202, 245, 0.15);
-  color: #c0caf5;
+  background: #2A2A2A;
+  color: #F8FAFC;
 }
 
-/* Usuń domyślne marginesy/paddingi, które mogą przeszkadzać */
 .widget-notifications,
 .notification-row .notification-background {
   margin: 0;
@@ -234,36 +226,37 @@
 }
 
 .notification {
-  background: rgba(0, 0, 0, 0.7);
-  color: #c0caf5;
+  background: #1A1A1A;
+  color: #F8FAFC;
+  border: 1px solid #2A2A2A;
   border-radius: 10px;
   margin: 2px;
   padding: 6px 10px;
 }
 
 .notification:hover {
-  background: rgba(0, 0, 0, 0.85);
-  border-color: rgba(192, 202, 245, 0.15);
+  background: #1F1F1F;
+  border-color: #3F3F46;
 }
 
 .notification .title {
-  color: #c0caf5;
+  color: #F8FAFC;
   font-weight: 500;
   font-size: 12px;
   margin-bottom: 1px;
 }
 
 .notification .body {
-  color: #c0caf5;
+  color: #CBD5E1;
   font-size: 11px;
   padding: 2px;
   opacity: 0.85;
 }
 
 .notification .time {
-  color: #c0caf5;
+  color: #94A3B8;
   font-size: 10px;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .notification .icon {
@@ -272,22 +265,20 @@
 }
 
 .notification .actions button {
-  background: rgba(0, 0, 0, 0.3);
+  background: #1F1F1F;
   border: none;
   border-radius: 6px;
-  color: #c0caf5;
-  padding: 3px 8px; /* zmniejszone z 4px 10px */
-  margin: 2px 2px 0 0; /* zmniejszone z 4px 4px 0 0 */
+  color: #CBD5E1;
+  padding: 3px 8px;
+  margin: 2px 2px 0 0;
   font-size: 11px;
 }
 
-/* Hover dla przycisków akcji (jeśli chcesz je osobno) */
 .notification-action button:hover {
-  background: rgba(192, 202, 245, 0.2);
-  color: #c0caf5;
+  background: #2A2A2A;
+  color: #F8FAFC;
 }
 
-/* Hover dla głównego obszaru powiadomienia */
 .notification-default-action:hover {
   background: none;
 }
