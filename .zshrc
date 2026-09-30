@@ -43,7 +43,7 @@ setopt PROMPT_SUBST
 function limited_path() {
   local pwd="${PWD/#$HOME/~}"
   if (( ${#pwd} > 30 )); then
-    echo "...${pwd[-27]}"
+    echo "...${pwd[-20]}"
   else
     echo "$pwd"
   fi

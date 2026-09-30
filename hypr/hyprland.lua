@@ -54,6 +54,10 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1")
 
   hl.exec_cmd("bluetoothctl power off")
+
+  --
+  --
+  hl.exec_cmd("nwg-drawer -c 5 -is 40 -spacing 4 -nocats -ovl -r")
 end)
 
 

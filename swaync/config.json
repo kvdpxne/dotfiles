@@ -45,9 +45,9 @@
           "position": "left",
           "actions": [{
               "label": "󰖔",
-              "command": "~/.local/bin/theme-toggle",
+              "command": "darkman get | grep -q dark && darkman set light || darkman set dark",
               "type": "toggle",
-              "update-command": "~/.local/bin/theme-state"
+              "update-command": "darkman get | grep -q dark"
           }]
       }
     },

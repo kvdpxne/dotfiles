@@ -1,31 +1,68 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+}
+
 window {
-    background-color: rgba(26, 27, 38, 0.95);
-    border: 1px solid #3b4261;
-    border-radius: 8px;
-    font-family: "JetBrainsMono Nerd Font";
-    font-size: 13px;
+  background: rgba(18, 18, 18, 0.96);
+  color: #F8FAFC;
 }
 
-#searchbox {
-margin: 8px;
-padding: 8px 12px;
-border: none;
-border-radius: 6px;
-background-color: rgba(15, 17, 23, 0.8);
-color: #c0caf5;
+entry {
+  background: #0F0F0F;
+  color: #F8FAFC;
+  border: 1px solid #3F3F46;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 6px 0;      /* było: 6px 4px — teraz pełna szerokość */
+  min-width: 400px;   /* opcjonalnie: wymuszenie minimalnej szerokości */
 }
 
-#searchbox:focus {
-box-shadow: none;
+entry:focus {
+  border-color: #60A5FA;
+  box-shadow: none;
 }
 
-flowboxchild {
-    padding: 8px;
-    border-radius: 6px;
-    color: #c0caf5;
+entry selection {
+  background: #1E3A8A;
+  color: #DBEAFE;
 }
 
-flowboxchild:selected {
-    background-color: #7aa2f7;
-    color: #0f1117;
+/* ---------- buttons ---------- */
+button,
+image {
+  background: none;
+  border: none;
+  color: #CBD5E1;
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+button:hover {
+  background: #2A2A2A;
+  color: #F8FAFC;
+}
+
+button:active,
+button:checked,
+button.active {
+  background: #1E3A8A;
+  color: #DBEAFE;
+}
+
+/* ---------- scrollbar (jak w control center) ---------- */
+scrollbar {
+  background: transparent;
+  margin: 4px 8px 4px 0;   /* góra, prawa, dół, lewa */
+}
+
+scrollbar slider {
+  background: #3F3F46;
+  border-radius: 3px;
+  min-width: 4px;
+  min-height: 24px;        /* dłuższy, czytelniejszy thumb */
+}
+
+scrollbar slider:hover {
+  background: #52525B;
 }

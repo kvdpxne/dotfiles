@@ -7,8 +7,8 @@
   "spacing": 2,
   "margin-top": 1,
   "margin-bottom": 1,
-  "margin-left": 2,
-  "margin-right": 2,
+  "margin-left": 1,
+  "margin-right": 1,
   "group/backlight-sunset": {
     "orientation": "horizontal",
     "modules": [
@@ -40,7 +40,7 @@
   "on-sigusr1": "toggle",
   "custom/menu": {
     "format": "󰌽",
-    "on-click": "nwg-drawer",
+    "on-click": "nwg-drawer -c 5 -is 40 -spacing 4 -nocats -ovl -open",
     "tooltip": "Menu"
   },
   "hyprland/submap": {
@@ -92,12 +92,19 @@
       "class<kitty> title<nvim.*>": "",
       "class<kitty> title<vim.*>": "",
       "class<thunar>": "󰉋",
+      "class<thunar> title<Downloads.*>": "󰉍",
+      "class<thunar> title<Pictures.*>": "󰉏",
+      "class<thunar> title<Musics.*>": "",
       "class<zen>": "󰈹",
       "class<zen> title<.*deepseek.*>": "",
       "class<zen> title<.*github.*>": "󰊤",
       "class<zen> title<.*twitch.*>": "󰕃",
       "class<zen> title<.*youtube.*>": "󰗃",
-      "class<chromium>": ""
+      "class<chromium>": "",
+      "class<webcord>": "",
+
+      // Android
+      "class<scrcpy>": ""
     },
     "format-window-separator": " ",
     "tooltip": true,
